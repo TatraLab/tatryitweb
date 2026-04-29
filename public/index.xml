@@ -9,11 +9,11 @@
     <lastBuildDate>Wed, 06 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Tatry AI 3</title>
+      <title>Tatry AI #3: Spec driven dev with AI</title>
       <link>http://localhost:1313/events/tai3/</link>
       <pubDate>Wed, 06 May 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/events/tai3/</guid>
-      <description>Stretnutie podsérie Tatry AI zameranej na umelú inteligenciu a praktické použitie AI.</description>
+      <description>Spec Driven Development s AI - prístup, ktorý posúva programovanie na ďalšiu úroveň cez jasné špecifikácie a štruktúrovaný workflow.</description>
     </item>
     <item>
       <title>Salesforce: viac než len CRM</title>
