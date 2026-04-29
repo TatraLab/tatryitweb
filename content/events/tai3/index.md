@@ -28,10 +28,11 @@ Speakers:
 - Filip Vnenčák
 
 📋 Program:
-• Intro — kto si a čo robíš ak sa ešte nepoznáme (10 min)
-• Spec driven development with AI - ukážky a diskusia (60 min)
-• Organizačné — dohodneme formát a témy na ďalšie stretká (15 min)
-• Voľná diskusia a networking 🍺
+
+- Intro — kto si a čo robíš ak sa ešte nepoznáme (10 min)
+- Spec driven development with AI - ukážky a diskusia (60 min)
+- Organizačné — dohodneme formát a témy na ďalšie stretká (15 min)
+- Voľná diskusia a networking 🍺
 
 👥 Pre koho to je:
 Pre každého, kto AI používa v práci alebo sa chce naučiť - developeri, DevOps, projekťáci, dizajnéri, jednoducho ktokoľvek z IT kto je zvedavý.
