@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Tatry IT</div>
+        <h1>{{ .Title }}</h1>
+      </div>
+    </div>
+    <div class="grid">
+      {{ range .Pages.ByDate.Reverse }}
+      <a class="card" href="{{ .RelPermalink }}">
+        {{ with .Params.poster }}<img src="{{ . }}" alt="{{ $.Title }}">{{ end }}
+        <div class="card-body">
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Date.Format "02.01.2006" }}</p>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

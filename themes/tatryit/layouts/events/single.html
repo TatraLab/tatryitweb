@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="event-page">
+  <div class="container event-layout">
+    <img src="{{ with .Resources.GetMatch .Params.poster }}{{ .RelPermalink }}{{ end }}" alt="{{ .Title }}">
+    <article class="prose">
+      <span class="badge">{{ .Params.series | default "Tatry IT" }}</span>
+      <h1>{{ .Title }}</h1>
+      <div class="meta">
+        <span>{{ .Date.Format "02.01.2006" }}</span>
+        <span>{{ .Params.time }}</span>
+        <span>{{ .Params.location }}</span>
+      </div>
+      {{ with .Params.speaker }}<p><strong>Spíker:</strong> {{ . }}</p>{{ end }}
+      {{ .Content }}
+      <div class="hero-actions">
+        {{ with .Params.registration_url }}<a class="btn primary" href="{{ . }}" target="_blank" rel="noopener">Registrovať sa</a>{{ end }}
+        {{ with .Params.youtube_url }}<a class="btn secondary" href="{{ . }}" target="_blank" rel="noopener">Pozrieť video</a>{{ end }}
+        {{ with .Params.meetup_url }}<a class="btn secondary" href="{{ . }}" target="_blank" rel="noopener">Meetup</a>{{ end }}
+      </div>
+    </article>
+  </div>
+</section>
+{{ end }}

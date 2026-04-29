@@ -1,0 +1,9 @@
+stats:
+  - value: "200+"
+    label: "členov komunity"
+  - value: "20+"
+    label: "ľudí pravidelne na meetupe"
+  - value: "1× mesačne"
+    label: "Tatry IT meetupy"
+  - value: "každé 2 týždne"
+    label: "s Tatry AI formátom"

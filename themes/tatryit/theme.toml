@@ -1,0 +1,11 @@
+name = 'Tatry IT'
+license = 'MIT'
+description = 'Light Hugo theme for Tatry IT Community'
+homepage = 'https://tatryit.sk/'
+tags = ['community', 'events', 'light', 'hugo']
+features = ['events', 'newsletter', 'responsive']
+min_version = '0.120.0'
+
+[author]
+  name = 'Tatry IT Community'
+  homepage = 'https://tatryit.sk/'

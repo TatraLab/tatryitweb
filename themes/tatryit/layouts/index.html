@@ -1,0 +1,172 @@
+{{ define "main" }}
+{{ $events := where .Site.RegularPages "Section" "events" }}
+{{ $eventData := slice }}
+{{ range $events }}
+  {{ $poster := "" }}
+  {{ with .Resources.GetMatch .Params.poster }}{{ $poster = .RelPermalink }}{{ end }}
+  {{ $eventData = $eventData | append (dict
+    "date"            (.Date.Format "2006-01-02")
+    "dateDisplay"     (.Date.Format "02.01.2006")
+    "title"           .Title
+    "url"             .RelPermalink
+    "time"            (.Params.time | default "")
+    "location"        (.Params.location | default "")
+    "poster"          $poster
+    "summary"         .Summary
+    "registrationUrl" (.Params.registration_url | default "")
+  ) }}
+{{ end }}
+<script>var TATRYIT_EVENTS = {{ $eventData | jsonify | safeJS }};</script>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="eyebrow">Poprad · Technológie · Komunita</div>
+      <h1>Tatry IT Community</h1>
+      <p class="lead">Lokálna IT komunita v Poprade pre ľudí z technológií, produktov, AI a digitálneho biznisu.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#podujatia">Najbližšie podujatie</a>
+        <a class="btn secondary" href="#newsletter">Newsletter</a>
+        <a class="btn secondary" href="{{ .Site.Params.youtube }}" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div class="logo-panel">
+      <img src="/images/logo_clean.png" alt="Tatry IT Community">
+      <div class="keyword-list">
+        <span><b>01</b> Technológie</span>
+        <span><b>02</b> Vzdelávanie</span>
+        <span><b>03</b> Komunita</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="podujatia" class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Podujatia</div>
+        <h2>Najbližší meetup</h2>
+      </div>
+      <p>Prednášky, Q&A, diskusie a networking v Coworking Poprad.</p>
+    </div>
+
+    <article id="next-event" class="feature-event" style="display:none"></article>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Program</div>
+        <h2>Nadchádzajúce podujatia</h2>
+      </div>
+    </div>
+    <div id="upcoming-grid" class="grid"></div>
+  </div>
+</section>
+
+<section id="tatry-ai" class="section">
+  <div class="container tatry-ai">
+    <div class="eyebrow">Podséria</div>
+    <h2>Tatry AI</h2>
+    <p>Tatry AI je podskupina v rámci Tatry IT zameraná na umelú inteligenciu, praktické využitie AI a nové technologické trendy.</p>
+    <a class="btn primary" href="#podujatia">Pozrieť podujatia</a>
+  </div>
+</section>
+
+<section id="o-komunite" class="section soft">
+  <div class="container about-grid">
+    <div>
+      <div class="eyebrow">O komunite</div>
+      <h2>Spájame ľudí z IT pod Tatrami</h2>
+      <p>Tatry IT Community je otvorená komunita v Poprade. Prepája profesionálov z technológií, digitálnych produktov a inovácií. Cieľom je vzdelávanie, networking, zdieľanie know-how a budovanie IT ekosystému v regióne.</p>
+    </div>
+    <div class="stats">
+      {{ range site.Data.site.stats }}
+      <div class="stat"><strong>{{ .value }}</strong><span>{{ .label }}</span></div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Archív</div>
+        <h2>Minulé podujatia</h2>
+      </div>
+      <a class="btn secondary" href="{{ .Site.Params.youtube }}" target="_blank" rel="noopener">Videá na YouTube</a>
+    </div>
+    <div id="past-grid" class="grid"></div>
+  </div>
+</section>
+
+<section id="newsletter" class="section">
+  <div class="container newsletter">
+    <div class="eyebrow">Newsletter</div>
+    <h2>Pridaj sa ku komunite</h2>
+    <p>Dostávaj pozvánky na meetupy, videá a komunitné novinky.</p>
+    {{ if .Site.Params.mailerlite_embed }}
+      {{ .Site.Params.mailerlite_embed | safeHTML }}
+    {{ else }}
+      <div class="embed-placeholder">Sem vlož MailerLite embed kód do <code>hugo.toml</code> → <code>params.mailerlite_embed</code>.</div>
+    {{ end }}
+  </div>
+</section>
+<script>
+(function () {
+  var events = window.TATRYIT_EVENTS || [];
+  var today = new Date().toISOString().split('T')[0];
+
+  var upcoming = events.filter(function (e) { return e.date >= today; })
+    .sort(function (a, b) { return a.date.localeCompare(b.date); });
+  var past = events.filter(function (e) { return e.date < today; })
+    .sort(function (a, b) { return b.date.localeCompare(a.date); });
+
+  var next = upcoming[0];
+
+  function cardHTML(e) {
+    return '<a class="card" href="' + e.url + '">' +
+      '<img src="' + e.poster + '" alt="' + e.title + '">' +
+      '<div class="card-body"><h3>' + e.title + '</h3>' +
+      '<p>' + e.dateDisplay + ' · ' + e.time + '</p></div></a>';
+  }
+
+  if (next) {
+    var el = document.getElementById('next-event');
+    el.innerHTML =
+      '<a href="' + next.url + '"><img src="' + next.poster + '" alt="' + next.title + '"></a>' +
+      '<div class="event-content">' +
+        '<span class="badge">Najbližšie podujatie</span>' +
+        '<h3 class="event-title"><a href="' + next.url + '">' + next.title + '</a></h3>' +
+        '<div class="meta">' +
+          '<span>' + next.dateDisplay + '</span>' +
+          '<span>' + next.time + '</span>' +
+          '<span>' + next.location + '</span>' +
+        '</div>' +
+        '<p>' + next.summary + '</p>' +
+        '<div class="hero-actions">' +
+          (next.registrationUrl ? '<a class="btn primary" href="' + next.registrationUrl + '" target="_blank" rel="noopener">Registrovať sa</a>' : '') +
+          '<a class="btn secondary" href="' + next.url + '">Detail podujatia</a>' +
+        '</div>' +
+      '</div>';
+    el.style.display = '';
+  }
+
+  var upcomingGrid = document.getElementById('upcoming-grid');
+  upcoming.forEach(function (e) { upcomingGrid.innerHTML += cardHTML(e); });
+
+  var pastGrid = document.getElementById('past-grid');
+  past.slice(0, 6).forEach(function (e) {
+    pastGrid.innerHTML +=
+      '<a class="card" href="' + e.url + '">' +
+      '<img src="' + e.poster + '" alt="' + e.title + '">' +
+      '<div class="card-body"><h3>' + e.title + '</h3>' +
+      '<p>' + e.dateDisplay + '</p></div></a>';
+  });
+})();
+</script>
+{{ end }}
