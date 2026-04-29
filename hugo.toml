@@ -1,4 +1,4 @@
-baseURL = 'https://tatryit.sk/'
+baseURL = 'https://tatryit.tatralab.com/'
 languageCode = 'sk-sk'
 title = 'Tatry IT Community'
 theme = 'tatryit'
