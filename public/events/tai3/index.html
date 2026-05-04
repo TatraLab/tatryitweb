@@ -7,7 +7,7 @@
   <meta name="description" content="Lokálna IT komunita v Poprade pre ľudí z technológií, produktov, AI a digitálneho biznisu.">
   <link rel="icon" href="/images/favicon-32x32.png">
   
-  <link rel="stylesheet" href="/css/main.min.7cf09ba6501a0c4e218b622f034907a5c7306c24e2660f334f18438e8b7e8b66.css">
+  <link rel="stylesheet" href="/css/main.min.b87590d5de52954edadaeb232dfbcd900887ccd6773fc1c4400fd2f52378e003.css">
 </head>
 <body>
   <header class="header">
@@ -28,7 +28,147 @@
   <main>
 <section class="event-page">
   <div class="container event-layout">
-    <img src="/events/tai3/tatry_ai.png" alt="Tatry AI #3: Spec driven dev with AI">
+    <div class="event-left">
+      <img src="/events/tai3/tatry_ai.png" alt="Tatry AI #3: Spec driven dev with AI">
+      
+  
+<div class="registration-form-wrapper" id="registration-form">
+  <h2>Registrácia</h2>
+  <p class="registration-subtitle">Zaregistruj sa na podujatie. Polia označené * sú povinné.</p>
+
+  <form id="event-registration-form" novalidate>
+    <input type="hidden" name="event_title" value="Tatry AI #3: Spec driven dev with AI">
+
+    <div class="form-field--hp" aria-hidden="true" tabindex="-1">
+      <label for="reg-website">Website</label>
+      <input type="text" id="reg-website" name="website" autocomplete="off" tabindex="-1">
+    </div>
+
+    <div class="form-field">
+      <label for="reg-name">Meno *</label>
+      <input type="text" id="reg-name" name="meno" required autocomplete="given-name">
+    </div>
+
+    <div class="form-field">
+      <label for="reg-surname">Priezvisko *</label>
+      <input type="text" id="reg-surname" name="priezvisko" required autocomplete="family-name">
+    </div>
+
+    <div class="form-field">
+      <label for="reg-email">Emailová adresa *</label>
+      <input type="email" id="reg-email" name="email" required autocomplete="email">
+    </div>
+
+    <div class="form-field">
+      <label for="reg-company">Názov firmy / organizácie</label>
+      <input type="text" id="reg-company" name="firma" autocomplete="organization">
+    </div>
+
+    <div class="form-field">
+      <label for="reg-phone">Telefónne číslo *</label>
+      <input type="tel" id="reg-phone" name="telefon" required autocomplete="tel">
+    </div>
+
+    <div class="form-field">
+      <label for="reg-message">Tu nám môžeš niečo odkázať</label>
+      <textarea id="reg-message" name="sprava" rows="3"></textarea>
+    </div>
+
+    <div class="form-field form-field--checkbox">
+      <label>
+        <input type="checkbox" name="gdpr_suhlas" required>
+        <span>Súhlasím so spracovaním osobných údajov *</span>
+      </label>
+    </div>
+
+    
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAADHp-Aq9rofzbSPr" data-theme="light"></div>
+    
+
+    <button type="submit" class="btn primary" id="reg-submit">Registrovať sa</button>
+  </form>
+
+  <div id="reg-success" class="reg-message reg-message--success" style="display:none;">
+    Ďakujeme za registráciu! Tešíme sa na teba.
+  </div>
+
+  <div id="reg-error" class="reg-message reg-message--error" style="display:none;">
+    Niečo sa nepodarilo. Skús to prosím znova.
+  </div>
+</div>
+
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+
+<script>
+(function() {
+  var form = document.getElementById('event-registration-form');
+  if (!form) return;
+
+  var submitBtn = document.getElementById('reg-submit');
+  var successEl = document.getElementById('reg-success');
+  var errorEl = document.getElementById('reg-error');
+  var webhookUrl = 'https:\/\/automation.tatralab.com\/webhook-test\/tatryit-registration-test';
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    errorEl.style.display = 'none';
+
+    if (form.elements['website'].value !== '') return;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    var turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
+    if (turnstileInput && !turnstileInput.value) {
+      errorEl.textContent = 'Prosím počkaj, overenie sa načítava...';
+      errorEl.style.display = '';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odosielam...';
+
+    var payload = {
+      event_title: form.elements['event_title'].value,
+      meno: form.elements['meno'].value,
+      priezvisko: form.elements['priezvisko'].value,
+      email: form.elements['email'].value,
+      firma: form.elements['firma'].value,
+      telefon: form.elements['telefon'].value,
+      sprava: form.elements['sprava'].value,
+      gdpr_suhlas: form.elements['gdpr_suhlas'].checked
+    };
+
+    if (turnstileInput) {
+      payload['cf-turnstile-response'] = turnstileInput.value;
+    }
+
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error(res.status);
+      form.style.display = 'none';
+      successEl.style.display = '';
+    })
+    .catch(function() {
+      errorEl.style.display = '';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Registrovať sa';
+    });
+  });
+})();
+</script>
+  
+
+
+    </div>
     <article class="prose">
       <span class="badge">Tatry AI</span>
       <h1>Tatry AI #3: Spec driven dev with AI</h1>
@@ -49,17 +189,19 @@
 <li>Ondrej Vaško</li>
 <li>Filip Vnenčák</li>
 </ul>
-<p>📋 Program:
-• Intro — kto si a čo robíš ak sa ešte nepoznáme (10 min)
-• Spec driven development with AI - ukážky a diskusia (60 min)
-• Organizačné — dohodneme formát a témy na ďalšie stretká (15 min)
-• Voľná diskusia a networking 🍺</p>
+<p>📋 Program:</p>
+<ul>
+<li>Intro — kto si a čo robíš ak sa ešte nepoznáme (10 min)</li>
+<li>Spec driven development with AI - ukážky a diskusia (60 min)</li>
+<li>Organizačné — dohodneme formát a témy na ďalšie stretká (15 min)</li>
+<li>Voľná diskusia a networking 🍺</li>
+</ul>
 <p>👥 Pre koho to je:
 Pre každého, kto AI používa v práci alebo sa chce naučiť - developeri, DevOps, projekťáci, dizajnéri, jednoducho ktokoľvek z IT kto je zvedavý.
 Nič nemusíš vedieť dopredu. Stačí prísť.</p>
 
       <div class="hero-actions">
-        <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfxsBr9EORchYFwHVGKtqsjaXpCfDrGqSPpokqAnTETei3NbA/viewform" target="_blank" rel="noopener">Registrovať sa</a>
+        
         
         <a class="btn secondary" href="https://www.meetup.com/tatry-it-community/events/314503871/" target="_blank" rel="noopener">Meetup</a>
       </div>

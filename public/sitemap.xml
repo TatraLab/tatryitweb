@@ -3,12 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/events/</loc>
-    <lastmod>2026-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2026-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/events/tai3/</loc>
-    <lastmod>2026-05-06T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/events/tit44/</loc>
+    <lastmod>2026-05-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
+    <lastmod>2026-05-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/events/tai3/</loc>
     <lastmod>2026-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/events/tit43/</loc>

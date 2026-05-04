@@ -11,6 +11,8 @@ buildFuture = true
   meetup = 'https://www.meetup.com/tatry-it-community/'
   youtube = 'https://www.youtube.com/@tatryitcommunity'
   linkedin = 'https://www.linkedin.com/company/tatry-it-community/'
+  registration_webhook = "https://automation.tatralab.com/webhook-test/tatryit-registration-test"
+  turnstile_site_key = "0x4AAAAAADHp-Aq9rofzbSPr"
   mailerlite_embed = '''
   <div class="ml-embedded" data-form="5lMOAQ"></div>
 	<!-- MailerLite Universal -->

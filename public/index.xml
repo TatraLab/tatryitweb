@@ -6,8 +6,15 @@
     <description>Recent content on Tatry IT Community</description>
     <generator>Hugo</generator>
     <language>sk-sk</language>
-    <lastBuildDate>Wed, 06 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Next Meetup TIT 44</title>
+      <link>http://localhost:1313/events/tit44/</link>
+      <pubDate>Sat, 16 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/tit44/</guid>
+      <description>Meetup o Salesforce platforme a možnostiach, ktoré idú ďalej než klasické CRM.</description>
+    </item>
     <item>
       <title>Tatry AI #3: Spec driven dev with AI</title>
       <link>http://localhost:1313/events/tai3/</link>

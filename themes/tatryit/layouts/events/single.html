@@ -1,7 +1,10 @@
 {{ define "main" }}
 <section class="event-page">
   <div class="container event-layout">
-    <img src="{{ with .Resources.GetMatch .Params.poster }}{{ .RelPermalink }}{{ end }}" alt="{{ .Title }}">
+    <div class="event-left">
+      <img src="{{ with .Resources.GetMatch .Params.poster }}{{ .RelPermalink }}{{ end }}" alt="{{ .Title }}">
+      {{ partial "registration-form.html" . }}
+    </div>
     <article class="prose">
       <span class="badge">{{ .Params.series | default "Tatry IT" }}</span>
       <h1>{{ .Title }}</h1>
